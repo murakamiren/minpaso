@@ -5,7 +5,6 @@ import { useCardGrid } from "./useCardGrid";
 
 const CardGrid: FC = () => {
 	const { formattedPostsData, isLoading } = useCardGrid();
-	console.log(formattedPostsData);
 
 	if (isLoading) return <Spinner />;
 

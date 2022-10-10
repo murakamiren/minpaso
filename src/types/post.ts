@@ -1,4 +1,4 @@
-type Spec = {
+export type Spec = {
 	cpu: string;
 	cpuCooler: string;
 	motherboard: string;

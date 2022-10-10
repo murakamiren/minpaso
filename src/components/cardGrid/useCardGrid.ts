@@ -14,7 +14,5 @@ export const useCardGrid = () => {
 		firstImage: post.image[0],
 	}));
 
-	console.log(postsData);
-
 	return { formattedPostsData, isLoading };
 };
