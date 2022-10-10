@@ -1,7 +1,7 @@
 import { Avatar, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { FC } from "react";
-import { useLogout } from "../../hook/logout";
+import { useLogout } from "../../hook/useLogout";
 import { NavAvatarProps } from "./type";
 
 const NavAvatar: FC<NavAvatarProps> = ({ photoURL, name }) => {
