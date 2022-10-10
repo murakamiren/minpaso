@@ -7,11 +7,9 @@ const client = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout = Component.getLayout ?? ((page) => page);
-	return getLayout(
+	return (
 		<ChakraProvider theme={theme}>
-			<QueryClientProvider client={client}>
-				<Component {...pageProps} />
-			</QueryClientProvider>
+			<QueryClientProvider client={client}>{getLayout(<Component {...pageProps} />)}</QueryClientProvider>
 		</ChakraProvider>
 	);
 }
