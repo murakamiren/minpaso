@@ -1,6 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import Head from "next/head";
+import Footer from "../components/footer/footer";
 import Navbar from "../components/navbar/navbar";
 
 const Home: NextPage = () => {
@@ -17,6 +18,8 @@ const Home: NextPage = () => {
 			<Box display="flex" justifyContent="center">
 				<Text color="text.black">hello world</Text>
 			</Box>
+
+			<Footer />
 		</div>
 	);
 };
