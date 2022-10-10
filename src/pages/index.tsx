@@ -1,3 +1,4 @@
+import { ArrowDownIcon } from "@chakra-ui/icons";
 import { Box, Center, Heading, HStack, Spacer, Text, VStack } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -24,9 +25,10 @@ const Home: NextPage = () => {
 						<Text color="text.black">自分の自作PCを共有し、みんなに見せよう。</Text>
 						<Text color="text.black">みんなのPCを見て、参考にしたりインスピレーションを受けてみよう。</Text>
 					</VStack>
-					<Center mt={20}>
+					<VStack mt={20} spacing={3}>
 						<Text color="text.black">今すぐ探索しよう</Text>
-					</Center>
+						<ArrowDownIcon color="linkedin.600" w={6} h={6} />
+					</VStack>
 				</Box>
 			</main>
 
