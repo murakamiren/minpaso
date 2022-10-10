@@ -1,4 +1,4 @@
-import { Box, Center, chakra, Heading, Link, List, ListItem, Text } from "@chakra-ui/react";
+import { Box, Center, chakra, Link, List, ListItem, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { FC, memo } from "react";
 import Logo from "../logo/logo";
