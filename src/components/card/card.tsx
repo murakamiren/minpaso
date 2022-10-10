@@ -7,7 +7,7 @@ import { useCard } from "./useCard";
 const Card: FC<CardProps> = ({ src, userName, title, postId }) => {
 	const { scale, filter, isHover } = useCard();
 	return (
-		<NextLink href={`/${postId}`} passHref>
+		<NextLink href={`/post/${postId}`} passHref>
 			<a>
 				<Box
 					w="full"
