@@ -12,9 +12,10 @@ type Spec = {
 export type PostType = {
 	id: string;
 	title: string;
-	favorited: string[];
+	favorited?: string[];
 	point: string;
 	spec: Spec;
 	image: string[];
 	author: string;
+	authorId: string;
 };

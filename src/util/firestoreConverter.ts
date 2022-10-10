@@ -17,6 +17,7 @@ export const postsConverter: FirestoreDataConverter<PostType> = {
 			point: post.point,
 			spec: post.spec,
 			author: post.author,
+			authorId: post.authorId,
 			createAt: serverTimestamp(),
 		};
 	},
@@ -31,6 +32,7 @@ export const postsConverter: FirestoreDataConverter<PostType> = {
 			point: data.point,
 			spec: data.spec,
 			author: data.author,
+			authorId: data.authorId,
 		};
 	},
 };
