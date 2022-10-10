@@ -11,7 +11,7 @@ const Card: FC<CardProps> = ({ src, userName, title, postId }) => {
 			<a>
 				<Box
 					w="full"
-					height="full"
+					maxHeight="400px"
 					onMouseOver={() => isHover(true)}
 					onMouseOut={() => isHover(false)}
 					cursor="pointer"
@@ -23,14 +23,15 @@ const Card: FC<CardProps> = ({ src, userName, title, postId }) => {
 						alt="pc image"
 						w="full"
 						objectFit="cover"
+						objectPosition="center"
 						transition="ease-out 0.3s"
 						transform={`scale(${scale})`}
 						filter={filter}
 					/>
-					<Text pos="absolute" bottom={2} left={2} zIndex={10}>
+					<Text pos="absolute" bottom={4} left={4} zIndex={10} color="red">
 						{userName}
 					</Text>
-					<Text pos="absolute" bottom={2} right={2} zIndex={10}>
+					<Text pos="absolute" bottom={4} right={4} zIndex={10} color="red">
 						{title}
 					</Text>
 				</Box>
