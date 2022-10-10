@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Center, Heading, HStack, Spacer, Text, VStack } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Footer from "../components/footer/footer";
@@ -15,9 +15,20 @@ const Home: NextPage = () => {
 
 			<Navbar />
 
-			<Box display="flex" justifyContent="center">
-				<Text color="text.black">hello world</Text>
-			</Box>
+			<main>
+				<Box mt="28">
+					<VStack justify="center">
+						<Heading as="h2" fontSize="5xl" fontWeight="semibold" color="text.black">
+							自慢のPCを共有、探索しよう
+						</Heading>
+						<Text color="text.black">自分の自作PCを共有し、みんなに見せよう。</Text>
+						<Text color="text.black">みんなのPCを見て、参考にしたりインスピレーションを受けてみよう。</Text>
+					</VStack>
+					<Center mt={20}>
+						<Text color="text.black">今すぐ探索しよう</Text>
+					</Center>
+				</Box>
+			</main>
 
 			<Footer />
 		</div>
