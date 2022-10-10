@@ -2,8 +2,7 @@ import { ArrowDownIcon } from "@chakra-ui/icons";
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
 import type { NextPageWithLayout } from "next";
 import Head from "next/head";
-import Footer from "../components/footer/footer";
-import Navbar from "../components/navbar/navbar";
+import CardGridMemo from "../components/cardGrid/cardGrid";
 import Layout from "../layout/layout";
 
 const Home: NextPageWithLayout = () => {
@@ -29,6 +28,9 @@ const Home: NextPageWithLayout = () => {
 						</Text>
 						<ArrowDownIcon color="linkedin.600" w={7} h={7} />
 					</VStack>
+				</Box>
+				<Box mt={20} px={20}>
+					<CardGridMemo />
 				</Box>
 			</main>
 		</div>

@@ -9,19 +9,27 @@ const Card: FC<CardProps> = ({ src, userName, postId }) => {
 	return (
 		<NextLink href={`/${postId}`} passHref>
 			<a>
-				<Box w="full" height="full">
+				<Box
+					w="full"
+					height="full"
+					onMouseOver={() => isHover(true)}
+					onMouseOut={() => isHover(false)}
+					cursor="pointer"
+					overflow="hidden"
+					pos="relative"
+				>
 					<Image
 						src={src}
 						alt="pc image"
 						w="full"
 						objectFit="cover"
-						transition="ease-out"
-						scale={scale}
+						transition="ease-out 0.3s"
+						transform={`scale(${scale})`}
 						filter={filter}
-						onMouseOver={() => isHover(true)}
-						onMouseOut={() => isHover(false)}
 					/>
-					<Text>{userName}</Text>
+					<Text pos="absolute" bottom={2} left={2} zIndex={10}>
+						{userName}
+					</Text>
 				</Box>
 			</a>
 		</NextLink>
