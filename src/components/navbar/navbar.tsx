@@ -11,7 +11,6 @@ import Logo from "../logo/logo";
 const Navbar: FC = () => {
 	const { handleLoginWithGoogle } = useLogin();
 	const { data: user } = useAuthUser("[nav-user]", auth);
-	console.log(user);
 
 	return (
 		<nav>
