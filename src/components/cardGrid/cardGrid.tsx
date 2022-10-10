@@ -1,25 +1,21 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem, Spinner } from "@chakra-ui/react";
 import { FC, memo } from "react";
 import Card from "../card/card";
+import { useCardGrid } from "./useCardGrid";
 
 const CardGrid: FC = () => {
+	const { formattedPostsData, isLoading } = useCardGrid();
+	console.log(formattedPostsData);
+
+	if (isLoading) return <Spinner />;
+
 	return (
 		<Grid gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))" gap={16}>
-			<GridItem>
-				<Card src="https://placehold.jp/300x300.png" userName="test" postId="1" />
-			</GridItem>
-			<GridItem>
-				<Card src="https://placehold.jp/300x300.png" userName="test" postId="1" />
-			</GridItem>
-			<GridItem>
-				<Card src="https://placehold.jp/300x300.png" userName="test" postId="1" />
-			</GridItem>
-			<GridItem>
-				<Card src="https://placehold.jp/300x300.png" userName="test" postId="1" />
-			</GridItem>
-			<GridItem>
-				<Card src="https://placehold.jp/300x300.png" userName="test" postId="1" />
-			</GridItem>
+			{formattedPostsData?.map((post) => (
+				<GridItem key={post.id}>
+					<Card src="https://placehold.jp/300x300.png" userName={post.author} postId={post.id} title={post.title} />
+				</GridItem>
+			))}
 		</Grid>
 	);
 };

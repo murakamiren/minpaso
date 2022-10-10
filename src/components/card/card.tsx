@@ -4,7 +4,7 @@ import { FC } from "react";
 import { CardProps } from "./type";
 import { useCard } from "./useCard";
 
-const Card: FC<CardProps> = ({ src, userName, postId }) => {
+const Card: FC<CardProps> = ({ src, userName, title, postId }) => {
 	const { scale, filter, isHover } = useCard();
 	return (
 		<NextLink href={`/${postId}`} passHref>
@@ -29,6 +29,9 @@ const Card: FC<CardProps> = ({ src, userName, postId }) => {
 					/>
 					<Text pos="absolute" bottom={2} left={2} zIndex={10}>
 						{userName}
+					</Text>
+					<Text pos="absolute" bottom={2} right={2} zIndex={10}>
+						{title}
 					</Text>
 				</Box>
 			</a>
