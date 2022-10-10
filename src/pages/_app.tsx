@@ -1,12 +1,13 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import type { AppProps } from "next/app";
+import type { AppPropsWithLayout } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import theme from "../constant/theme";
 
 const client = new QueryClient();
 
-function MyApp({ Component, pageProps }: AppProps) {
-	return (
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+	const getLayout = Component.getLayout ?? ((page) => page);
+	return getLayout(
 		<ChakraProvider theme={theme}>
 			<QueryClientProvider client={client}>
 				<Component {...pageProps} />
