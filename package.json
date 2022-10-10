@@ -15,6 +15,7 @@
     "@emotion/styled": "^11",
     "@hookform/resolvers": "^2.9.8",
     "@react-query-firebase/auth": "^1.0.0-dev.2",
+    "@react-query-firebase/firestore": "^1.0.0-dev.7",
     "firebase": "^9.11.0",
     "framer-motion": "^6",
     "next": "12.3.1",
