@@ -1,6 +1,6 @@
 import { Box, Center, chakra, Heading, Link, List, ListItem, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { FC } from "react";
+import { FC, memo } from "react";
 import Logo from "../logo/logo";
 import { navItem } from "../navbar/navItem";
 
@@ -37,4 +37,6 @@ const Footer: FC = () => {
 	);
 };
 
-export default Footer;
+const footerMemo = memo(Footer);
+
+export default footerMemo;
