@@ -1,15 +1,22 @@
-import { Box, Button, chakra, Flex, Heading, Link, List, ListItem } from "@chakra-ui/react";
+import { Avatar, Box, Button, chakra, Flex, Heading, Link, List, ListItem, Text } from "@chakra-ui/react";
+import { useAuthUser } from "@react-query-firebase/auth";
 import NextLink from "next/link";
 import { FC } from "react";
+import { auth } from "../../lib/firebase";
+import NavAvatar from "../navAvatar/navAvatar";
 import { navItem } from "./navItem";
+import { useLogin } from "../../hook/useLogin";
+import Logo from "../logo/logo";
 
 const Navbar: FC = () => {
+	const { handleLoginWithGoogle } = useLogin();
+	const { data: user } = useAuthUser("[nav-user]", auth);
+	console.log(user);
+
 	return (
 		<nav>
 			<Flex px={20} py={4} justify="space-between" alignItems="center">
-				<Heading as="h1" fontWeight="bold" color="text.black" fontSize="3xl" letterSpacing="tighter">
-					みん<chakra.span color="linkedin.600">パソ</chakra.span>
-				</Heading>
+				<Logo />
 				<Box flex={1} display="flex" justifyContent="flex-end" alignItems="center" gap={4}>
 					<List display="flex" gap={4}>
 						{navItem.map((item, i) => (
@@ -20,11 +27,13 @@ const Navbar: FC = () => {
 							</ListItem>
 						))}
 					</List>
-					<NextLink href="/login">
-						<Button fontWeight="semibold" colorScheme="linkedin">
+					{user && user.photoURL && user.displayName ? (
+						<NavAvatar photoURL={user.photoURL} name={user.displayName} />
+					) : (
+						<Button fontWeight="semibold" colorScheme="linkedin" onClick={() => handleLoginWithGoogle()}>
 							ログイン
 						</Button>
-					</NextLink>
+					)}
 				</Box>
 			</Flex>
 		</nav>
