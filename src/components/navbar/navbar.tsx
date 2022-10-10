@@ -6,7 +6,7 @@ import { navItem } from "./navItem";
 const Navbar: FC = () => {
 	return (
 		<nav>
-			<Flex px={8} py={4} justify="space-between" alignItems="center">
+			<Flex px={20} py={4} justify="space-between" alignItems="center">
 				<Heading as="h1" fontWeight="bold" color="text.black" fontSize="3xl" letterSpacing="tighter">
 					みん<chakra.span color="linkedin.600">パソ</chakra.span>
 				</Heading>
