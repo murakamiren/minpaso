@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Link, List, ListItem } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Link, List, ListItem } from "@chakra-ui/react";
 import { useAuthUser } from "@react-query-firebase/auth";
 import NextLink from "next/link";
 import { FC, memo } from "react";
@@ -7,6 +7,7 @@ import NavAvatar from "../navAvatar/navAvatar";
 import { navItem } from "./navItem";
 import { useLogin } from "../../hook/useLogin";
 import Logo from "../logo/logo";
+import { useRouter } from "next/router";
 
 const Navbar: FC = () => {
 	const { handleLoginWithGoogle } = useLogin();
@@ -27,7 +28,16 @@ const Navbar: FC = () => {
 						))}
 					</List>
 					{user && user.photoURL && user.displayName ? (
-						<NavAvatar photoURL={user.photoURL} name={user.displayName} />
+						<HStack spacing={4}>
+							<NavAvatar photoURL={user.photoURL} name={user.displayName} />
+							<NextLink href="/share" passHref>
+								<a>
+									<Button fontWeight="semibold" colorScheme="linkedin">
+										共有する
+									</Button>
+								</a>
+							</NextLink>
+						</HStack>
 					) : (
 						<Button fontWeight="semibold" colorScheme="linkedin" onClick={() => handleLoginWithGoogle()}>
 							ログイン
