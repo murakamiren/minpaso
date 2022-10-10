@@ -14,12 +14,14 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@hookform/resolvers": "^2.9.8",
+    "@react-query-firebase/auth": "^1.0.0-dev.2",
     "firebase": "^9.11.0",
     "framer-motion": "^6",
     "next": "12.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.37.0",
+    "react-query": "3.39.2",
     "zod": "^3.19.1"
   },
   "devDependencies": {
