@@ -1,20 +1,19 @@
 import { Box, Heading } from "@chakra-ui/react";
-import { NextPage } from "next";
-import Footer from "../components/footer/footer";
-import Navbar from "../components/navbar/navbar";
+import { NextPageWithLayout } from "next";
+import Layout from "../layout/layout";
 
-const MyPage: NextPage = () => {
+const MyPage: NextPageWithLayout = () => {
 	return (
 		<>
-			<Navbar />
 			<main>
 				<Box>
 					<Heading as="h2">マイページ</Heading>
 				</Box>
 			</main>
-			<Footer />
 		</>
 	);
 };
+
+MyPage.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default MyPage;

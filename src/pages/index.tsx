@@ -1,11 +1,12 @@
 import { ArrowDownIcon } from "@chakra-ui/icons";
-import { Box, Center, Heading, HStack, Spacer, Text, VStack } from "@chakra-ui/react";
-import type { NextPage } from "next";
+import { Box, Heading, Text, VStack } from "@chakra-ui/react";
+import type { NextPageWithLayout } from "next";
 import Head from "next/head";
 import Footer from "../components/footer/footer";
 import Navbar from "../components/navbar/navbar";
+import Layout from "../layout/layout";
 
-const Home: NextPage = () => {
+const Home: NextPageWithLayout = () => {
 	return (
 		<div>
 			<Head>
@@ -13,9 +14,6 @@ const Home: NextPage = () => {
 				<meta name="description" content="みんパソ" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-
-			<Navbar />
-
 			<main>
 				<Box mt="28">
 					<VStack justify="center">
@@ -33,10 +31,10 @@ const Home: NextPage = () => {
 					</VStack>
 				</Box>
 			</main>
-
-			<Footer />
 		</div>
 	);
 };
+
+Home.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default Home;
