@@ -1,15 +1,14 @@
 import { Box, Center, chakra, Heading, Link, List, ListItem, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { FC } from "react";
+import Logo from "../logo/logo";
 import { navItem } from "../navbar/navItem";
 
 const Footer: FC = () => {
 	return (
 		<chakra.footer w="full" h="360px">
 			<Box px={20} h="90%" display="flex" flexDir="column" alignItems="center" justifyContent="center">
-				<Heading as="h1" fontWeight="bold" color="text.black" fontSize="3xl" letterSpacing="tighter">
-					みん<chakra.span color="linkedin.600">パソ</chakra.span>
-				</Heading>
+				<Logo />
 				<Text color="text.black" mt={4} textAlign="center" fontSize="sm">
 					自慢のPCを共有、探索しよう。
 					<br />
