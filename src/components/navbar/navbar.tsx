@@ -1,4 +1,4 @@
-import { Box, Button, chakra, Flex, Heading, Link, List, ListItem } from "@chakra-ui/react";
+import { Box, Button, Flex, Link, List, ListItem } from "@chakra-ui/react";
 import { useAuthUser } from "@react-query-firebase/auth";
 import NextLink from "next/link";
 import { FC, memo } from "react";
