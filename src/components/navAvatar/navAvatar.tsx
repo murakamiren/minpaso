@@ -1,6 +1,6 @@
 import { Avatar, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { FC } from "react";
+import { FC, memo } from "react";
 import { useLogout } from "../../hook/useLogout";
 import { NavAvatarProps } from "./type";
 
@@ -9,13 +9,13 @@ const NavAvatar: FC<NavAvatarProps> = ({ photoURL, name }) => {
 
 	return (
 		<Menu>
-			<MenuButton as={Avatar} name={name} src={photoURL} size="sm" />
+			<MenuButton as={Avatar} name={name} src={photoURL} size="sm" loading="lazy" />
 			<MenuList>
-				<MenuItem>
-					<NextLink href="/mypage" passHref>
+				<NextLink href="/mypage" passHref>
+					<MenuItem>
 						<a>マイページ</a>
-					</NextLink>
-				</MenuItem>
+					</MenuItem>
+				</NextLink>
 				<MenuItem onClick={() => handleLogout()}>
 					<Text>ログアウト</Text>
 				</MenuItem>
@@ -24,4 +24,6 @@ const NavAvatar: FC<NavAvatarProps> = ({ photoURL, name }) => {
 	);
 };
 
-export default NavAvatar;
+const NavAvatarMemo = memo(NavAvatar);
+
+export default NavAvatarMemo;

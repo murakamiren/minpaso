@@ -1,7 +1,7 @@
-import { Avatar, Box, Button, chakra, Flex, Heading, Link, List, ListItem, Text } from "@chakra-ui/react";
+import { Box, Button, chakra, Flex, Heading, Link, List, ListItem } from "@chakra-ui/react";
 import { useAuthUser } from "@react-query-firebase/auth";
 import NextLink from "next/link";
-import { FC } from "react";
+import { FC, memo } from "react";
 import { auth } from "../../lib/firebase";
 import NavAvatar from "../navAvatar/navAvatar";
 import { navItem } from "./navItem";
@@ -10,7 +10,7 @@ import Logo from "../logo/logo";
 
 const Navbar: FC = () => {
 	const { handleLoginWithGoogle } = useLogin();
-	const { data: user } = useAuthUser("[nav-user]", auth);
+	const { data: user } = useAuthUser("[nav-user]", auth, { staleTime: Infinity });
 
 	return (
 		<nav>
@@ -39,4 +39,6 @@ const Navbar: FC = () => {
 	);
 };
 
-export default Navbar;
+const navbarMemo = memo(Navbar);
+
+export default navbarMemo;
