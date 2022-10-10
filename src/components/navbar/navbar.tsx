@@ -8,10 +8,11 @@ import { navItem } from "./navItem";
 import { useLogin } from "../../hook/useLogin";
 import Logo from "../logo/logo";
 import { useRouter } from "next/router";
+import { useUser } from "../../hook/useUser";
 
 const Navbar: FC = () => {
 	const { handleLoginWithGoogle } = useLogin();
-	const { data: user } = useAuthUser("[nav-user]", auth, { staleTime: Infinity });
+	const { user } = useUser();
 
 	return (
 		<nav>
