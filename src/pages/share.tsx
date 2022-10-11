@@ -7,7 +7,7 @@ import ShareForm from "../components/shareForm/shareForm";
 const Share: NextPageWithLayout = () => {
 	return (
 		<main>
-			<Box px={20}>
+			<Box px={20} pb={8}>
 				<Box mt={4}>
 					<NextLink href="/" passHref>
 						<a>

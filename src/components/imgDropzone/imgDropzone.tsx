@@ -6,7 +6,7 @@ const ImgDropzone: FC = () => {
 	const { getRootProps, getInputProps, isDragActive, open, file } = useImgDropzone();
 
 	return (
-		<>
+		<Box display="flex">
 			<Box
 				{...getRootProps()}
 				w="xs"
@@ -29,14 +29,14 @@ const ImgDropzone: FC = () => {
 					</Button>
 				</VStack>
 			</Box>
-			<Box>
+			<Box display="flex">
 				{file.map((img) => (
 					<Box key={img.name} w="80px" h="80px">
 						<Image src={img.preview} alt={img.name} objectFit="contain" />
 					</Box>
 				))}
 			</Box>
-		</>
+		</Box>
 	);
 };
 
