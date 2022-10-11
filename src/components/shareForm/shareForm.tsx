@@ -5,12 +5,12 @@ import { useShare } from "./useShare";
 
 const ShareForm: FC = () => {
 	const htmlId = useId();
-	const { onSubmit, handleSubmit, register, isLoading } = useShare();
+	const { onSubmit, handleSubmit, register, isLoading, setValue } = useShare();
 	return (
 		<form onSubmit={handleSubmit((data) => onSubmit(data))}>
 			<VStack spacing={8}>
 				<FormControl>
-					<ImgDropzone />
+					<ImgDropzone setValue={setValue} />
 				</FormControl>
 				<FormControl>
 					<FormLabel htmlFor={htmlId + "-title"}>タイトル</FormLabel>

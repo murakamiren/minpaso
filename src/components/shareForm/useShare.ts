@@ -1,26 +1,50 @@
 import { useFirestoreCollectionMutation } from "@react-query-firebase/firestore";
 import { collection } from "firebase/firestore";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useUser } from "../../hook/useUser";
-import { firestore } from "../../lib/firebase";
-import { PostType } from "../../types/post";
+import { firestore, storage } from "../../lib/firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { imgRefPath } from "../../constant/storage";
+import { useAtomValue } from "jotai";
+import { ShareFormDataType } from "./type";
 
 export const useShare = () => {
-	const { handleSubmit, register } = useForm();
+	const { handleSubmit, register, setValue } = useForm<ShareFormDataType>();
 	const { user } = useUser();
 
-	const ref = collection(firestore, "posts");
-	const { mutate, isLoading } = useFirestoreCollectionMutation(ref);
+	const randomId = Math.random().toString(32).substring(2);
 
-	const onSubmit = (formData: any) => {
+	const postRef = collection(firestore, "posts");
+	const { mutate, isLoading } = useFirestoreCollectionMutation(postRef);
+
+	const onSubmit: SubmitHandler<ShareFormDataType> = async (formData) => {
+		let imgFilePathArr: string[] = [];
+		console.log("upload process");
+
+		const imgFile = formData.imgFile;
+
 		console.log(formData);
+
+		await Promise.all(
+			imgFile.map(async (file) => {
+				if (user) {
+					const imgFileName = randomId + file.name;
+					const imgUploadPath = `${imgRefPath}${user.uid}/${imgFileName}`;
+					const imgUploadRef = ref(storage, imgUploadPath);
+					const snapshot = await uploadBytes(imgUploadRef, file);
+					const url = await getDownloadURL(snapshot.ref);
+					await imgFilePathArr.push(url);
+					console.log(imgFilePathArr);
+				} else {
+					console.log("no user");
+				}
+			})
+		);
+
 		const testPostingValue = {
 			title: formData.title,
 			point: formData.point,
-			image: [
-				"https://images.unsplash.com/photo-1587302912306-cf1ed9c33146?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=760&q=80",
-				"https://images.unsplash.com/photo-1542729716-6d1890d980ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
-			],
+			image: imgFilePathArr,
 			spec: {
 				case: "nice case",
 				cpu: "good cpu",
@@ -36,8 +60,11 @@ export const useShare = () => {
 			authorId: user?.uid,
 		};
 
-		mutate(testPostingValue);
+		console.log(testPostingValue);
+
+		await mutate(testPostingValue);
+		imgFilePathArr = [];
 	};
 
-	return { onSubmit, handleSubmit, register, isLoading };
+	return { onSubmit, handleSubmit, register, isLoading, setValue };
 };
