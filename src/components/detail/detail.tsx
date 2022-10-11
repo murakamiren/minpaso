@@ -1,4 +1,4 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Center, Image, Spinner, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import { Spec } from "../../types/post";
 import { useDetail } from "./useDetail";
@@ -6,7 +6,12 @@ import { useDetail } from "./useDetail";
 const Detail: FC = () => {
 	const { postData } = useDetail();
 
-	if (!postData) return <Text>aaa</Text>;
+	if (!postData)
+		return (
+			<Center>
+				<Spinner />
+			</Center>
+		);
 
 	console.log(postData);
 
