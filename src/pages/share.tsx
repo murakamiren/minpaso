@@ -8,12 +8,16 @@ const Share: NextPageWithLayout = () => {
 	return (
 		<main>
 			<Box px={20}>
-				<NextLink href="/" passHref>
-					<a>
-						<ArrowBackIcon w={8} h={8} />
-					</a>
-				</NextLink>
-				<Heading as="h2">共有する</Heading>
+				<Box mt={4}>
+					<NextLink href="/" passHref>
+						<a>
+							<ArrowBackIcon w={8} h={8} />
+						</a>
+					</NextLink>
+				</Box>
+				<Heading as="h2" my={12}>
+					共有する
+				</Heading>
 				<ShareForm />
 			</Box>
 		</main>

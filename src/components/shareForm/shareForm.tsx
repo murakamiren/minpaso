@@ -1,5 +1,6 @@
 import { Button, FormControl, FormLabel, Input, Textarea, VStack } from "@chakra-ui/react";
 import { FC, useId } from "react";
+import ImgDropzone from "../imgDropzone/imgDropzone";
 import { useShare } from "./useShare";
 
 const ShareForm: FC = () => {
@@ -9,10 +10,7 @@ const ShareForm: FC = () => {
 		<form onSubmit={handleSubmit((data) => onSubmit(data))}>
 			<VStack spacing={8}>
 				<FormControl>
-					<FormLabel htmlFor={htmlId + "-img"} color="text.black">
-						画像
-					</FormLabel>
-					<Input type="file" id={htmlId + "-img"} />
+					<ImgDropzone />
 				</FormControl>
 				<FormControl>
 					<FormLabel htmlFor={htmlId + "-title"}>タイトル</FormLabel>
