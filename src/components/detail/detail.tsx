@@ -1,10 +1,10 @@
-import { Box, Center, Image, Spinner, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Image, Spinner, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import { Spec } from "../../types/post";
 import { useDetail } from "./useDetail";
 
 const Detail: FC = () => {
-	const { postData } = useDetail();
+	const { postData, user, isLoading, onClickToDeleteMyPost } = useDetail();
 
 	if (!postData)
 		return (
@@ -33,6 +33,11 @@ const Detail: FC = () => {
 					</Text>
 				);
 			})}
+			{user && (
+				<Button colorScheme="red" isLoading={isLoading} onClick={() => onClickToDeleteMyPost()}>
+					削除する
+				</Button>
+			)}
 		</Box>
 	);
 };
