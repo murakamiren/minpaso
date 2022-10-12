@@ -17,7 +17,7 @@ export const useCard = () => {
 
 	useEffect(() => {
 		if (hover) {
-			setScale(() => 1.2);
+			setScale(() => 1.1);
 			setFilter(() => "brightness(1.1)");
 		} else {
 			setScale(() => 1);
