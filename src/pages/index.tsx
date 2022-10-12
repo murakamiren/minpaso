@@ -14,7 +14,7 @@ const Home: NextPageWithLayout = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>
-				<Box mt="28">
+				<Box mt="48">
 					<VStack justify="center">
 						<Heading as="h2" fontSize="5xl" fontWeight="semibold" color="text.black">
 							自慢のPCを共有、探索しよう
