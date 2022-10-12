@@ -33,7 +33,7 @@ const Detail: FC = () => {
 					</Text>
 				);
 			})}
-			{user && (
+			{user?.uid === postData.authorId && (
 				<Button colorScheme="red" isLoading={isLoading} onClick={() => onClickToDeleteMyPost()}>
 					削除する
 				</Button>
