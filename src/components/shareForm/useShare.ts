@@ -7,6 +7,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { imgRefPath } from "../../constant/storage";
 import { useAtomValue } from "jotai";
 import { ShareFormDataType } from "./type";
+import { handleResize } from "../../lib/loadImage";
 
 export const useShare = () => {
 	const { handleSubmit, register, setValue } = useForm<ShareFormDataType>();
@@ -21,23 +22,22 @@ export const useShare = () => {
 		let imgFilePathArr: string[] = [];
 		console.log("upload process");
 
+		if (!user) return console.log("no user");
+
 		const imgFile = formData.imgFile;
 
 		console.log(formData);
 
 		await Promise.all(
 			imgFile.map(async (file) => {
-				if (user) {
-					const imgFileName = randomId + file.name;
-					const imgUploadPath = `${imgRefPath}${user.uid}/${imgFileName}`;
-					const imgUploadRef = ref(storage, imgUploadPath);
-					const snapshot = await uploadBytes(imgUploadRef, file);
-					const url = await getDownloadURL(snapshot.ref);
-					await imgFilePathArr.push(url);
-					console.log(imgFilePathArr);
-				} else {
-					console.log("no user");
-				}
+				const resizeImg = await handleResize(file);
+				const imgFileName = randomId + file.name;
+				const imgUploadPath = `${imgRefPath}${user.uid}/${imgFileName}`;
+				const imgUploadRef = ref(storage, imgUploadPath);
+				const snapshot = await uploadBytes(imgUploadRef, resizeImg);
+				const url = await getDownloadURL(snapshot.ref);
+				await imgFilePathArr.push(url);
+				console.log(imgFilePathArr);
 			})
 		);
 
