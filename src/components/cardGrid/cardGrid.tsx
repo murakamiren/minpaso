@@ -9,7 +9,7 @@ const CardGrid: FC = () => {
 	if (isLoading) return <Spinner />;
 
 	return (
-		<Grid gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))" gap={16}>
+		<Grid gridTemplateColumns="repeat(auto-fit, minmax(320px, 1fr))" gap={16}>
 			{formattedPostsData?.map((post) => (
 				<GridItem key={post.id}>
 					<Card src={post.firstImage} userName={post.author} postId={post.id} title={post.title} />

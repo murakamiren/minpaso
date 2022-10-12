@@ -9,7 +9,7 @@ const Card: FC<CardProps> = ({ src, userName, title, postId }) => {
 	return (
 		<Box
 			w="full"
-			maxHeight="400px"
+			h="360px"
 			onMouseOver={() => isHover(true)}
 			onMouseOut={() => isHover(false)}
 			cursor="pointer"
@@ -21,6 +21,7 @@ const Card: FC<CardProps> = ({ src, userName, title, postId }) => {
 				src={src}
 				alt="pc image"
 				w="full"
+				h="full"
 				objectFit="cover"
 				objectPosition="center"
 				transition="ease-out 0.3s"
