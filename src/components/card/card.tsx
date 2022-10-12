@@ -1,5 +1,4 @@
 import { Box, Image, Text } from "@chakra-ui/react";
-import NextLink from "next/link";
 import { FC } from "react";
 import { CardProps } from "./type";
 import { useCard } from "./useCard";
@@ -9,7 +8,8 @@ const Card: FC<CardProps> = ({ src, userName, title, postId }) => {
 	return (
 		<Box
 			w="full"
-			h="360px"
+			h="full"
+			maxH="400px"
 			onMouseOver={() => isHover(true)}
 			onMouseOut={() => isHover(false)}
 			cursor="pointer"
