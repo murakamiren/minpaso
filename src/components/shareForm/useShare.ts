@@ -26,8 +26,6 @@ export const useShare = () => {
 
 		const imgFile = formData.imgFile;
 
-		console.log(formData);
-
 		await Promise.all(
 			imgFile.map(async (file) => {
 				const resizeImg = await handleResize(file);
@@ -37,7 +35,6 @@ export const useShare = () => {
 				const snapshot = await uploadBytes(imgUploadRef, resizeImg);
 				const url = await getDownloadURL(snapshot.ref);
 				await imgFilePathArr.push(url);
-				console.log(imgFilePathArr);
 			})
 		);
 
@@ -59,8 +56,6 @@ export const useShare = () => {
 			author: user?.displayName,
 			authorId: user?.uid,
 		};
-
-		console.log(testPostingValue);
 
 		await mutate(testPostingValue);
 		imgFilePathArr = [];
