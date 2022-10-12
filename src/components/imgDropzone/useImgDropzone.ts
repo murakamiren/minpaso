@@ -1,4 +1,3 @@
-import { useSetAtom } from "jotai";
 import { useCallback, useEffect, useState } from "react";
 import { FileWithPath, useDropzone } from "react-dropzone";
 import { FileWithPreview, ImgDropzoneProps } from "./type";
