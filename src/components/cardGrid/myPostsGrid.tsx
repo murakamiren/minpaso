@@ -15,7 +15,7 @@ const MyPostsGrid: FC<MyPostGridProps> = ({ user }) => {
 		);
 
 	return (
-		<Grid gridTemplateColumns="repeat(auto-fit, minmax(min(480px, 100%), 1fr))" gap={16}>
+		<Grid gridTemplateColumns="repeat(auto-fit, minmax(min(480px, 100%), 1fr))" gap={8}>
 			{formattedMyPostsData?.map((post) => (
 				<GridItem key={post.id}>
 					<Card src={post.firstImage} userName={post.author} postId={post.id} title={post.title} />
