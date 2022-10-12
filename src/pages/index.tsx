@@ -23,7 +23,7 @@ const Home: NextPageWithLayout = () => {
 						<Text color="text.black">みんなのPCを見て、参考にしたりインスピレーションを受けてみよう。</Text>
 					</VStack>
 					<VStack mt={20} spacing={3}>
-						<Text color="text.black" fontWeight="semibold">
+						<Text color="text.black" fontWeight="semibold" fontSize="xl">
 							今すぐ探索しよう
 						</Text>
 						<ArrowDownIcon color="linkedin.600" w={7} h={7} />
