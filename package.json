@@ -16,6 +16,7 @@
     "@hookform/resolvers": "^2.9.8",
     "@react-query-firebase/auth": "^1.0.0-dev.2",
     "@react-query-firebase/firestore": "^1.0.0-dev.7",
+    "blueimp-load-image": "^5.16.0",
     "firebase": "^9.11.0",
     "framer-motion": "^6",
     "jotai": "^1.8.5",
@@ -28,6 +29,7 @@
     "zod": "^3.19.1"
   },
   "devDependencies": {
+    "@types/blueimp-load-image": "^5.16.0",
     "@types/node": "18.8.3",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
