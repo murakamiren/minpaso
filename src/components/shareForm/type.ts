@@ -5,3 +5,8 @@ export type ShareFormDataType = {
 	point: string;
 	imgFile: FileWithPreview[];
 };
+
+export type ImgInfoType = {
+	src: string;
+	path: string;
+};
