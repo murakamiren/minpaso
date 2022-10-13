@@ -1,10 +1,10 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Fade, Image, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import { CardProps } from "./type";
 import { useCard } from "./useCard";
 
 const Card: FC<CardProps> = ({ src, userName, title, postId }) => {
-	const { scale, filter, isHover, clickToPassQueryId } = useCard();
+	const { scale, filter, isHover, clickToPassQueryId, isOpen } = useCard();
 	return (
 		<Box
 			w="full"
@@ -28,12 +28,14 @@ const Card: FC<CardProps> = ({ src, userName, title, postId }) => {
 				transform={`scale(${scale})`}
 				filter={filter}
 			/>
-			<Text pos="absolute" bottom={4} left={4} zIndex={10} color="red">
-				{userName}
-			</Text>
-			<Text pos="absolute" bottom={4} right={4} zIndex={10} color="red">
-				{title}
-			</Text>
+			<Fade in={isOpen}>
+				<Text pos="absolute" bottom={4} left={4} zIndex={10} color="whiteAlpha.900" fontWeight="bold">
+					{title}
+				</Text>
+				<Text pos="absolute" bottom={4} right={4} zIndex={10} color="whiteAlpha.900" fontWeight="bold">
+					{userName}
+				</Text>
+			</Fade>
 		</Box>
 	);
 };
