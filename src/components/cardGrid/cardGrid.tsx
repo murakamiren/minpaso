@@ -14,7 +14,7 @@ const CardGrid: FC = () => {
 		);
 
 	return (
-		<Grid gridTemplateColumns="repeat(auto-fit, minmax(min(480px, 100%), 1fr))" gap={8}>
+		<Grid gridTemplateColumns="repeat(auto-fit, minmax(min(440px, 100%), 1fr))" gap={8} justifyItems="center">
 			{formattedPostsData?.map((post) => (
 				<GridItem key={post.id}>
 					<Card src={post.firstImage} userName={post.author} postId={post.id} title={post.title} />
