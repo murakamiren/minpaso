@@ -1,4 +1,4 @@
-import { Box, Fade, Image, SlideFade, Text } from "@chakra-ui/react";
+import { Box, Image, SlideFade, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import { CardProps } from "./type";
 import { useCard } from "./useCard";
