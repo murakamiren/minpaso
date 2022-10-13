@@ -29,7 +29,7 @@ const Home: NextPageWithLayout = () => {
 						<ArrowDownIcon color="linkedin.600" w={7} h={7} />
 					</VStack>
 				</Box>
-				<Box mt={20} px="40">
+				<Box mt={20} px="24">
 					<CardGridMemo />
 				</Box>
 			</main>

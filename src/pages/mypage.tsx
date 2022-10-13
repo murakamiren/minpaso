@@ -18,7 +18,7 @@ const MyPage: NextPageWithLayout = () => {
 
 	return (
 		<main>
-			<Box px="40" mt={20}>
+			<Box px="24" mt={20}>
 				<VStack spacing={2}>
 					<Avatar src={userPhoto} size="xl" />
 					<Heading as="h2">{user.displayName}</Heading>
