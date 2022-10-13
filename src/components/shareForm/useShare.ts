@@ -5,21 +5,34 @@ import { useUser } from "../../hook/useUser";
 import { firestore, storage } from "../../lib/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { imgRefPath } from "../../constant/storage";
-import { useAtomValue } from "jotai";
-import { ShareFormDataType } from "./type";
+import { ImgInfoType, ShareFormDataType } from "./type";
 import { handleResize } from "../../lib/loadImage";
+import { useRouter } from "next/router";
+import { useQueryClient } from "react-query";
+import { useState } from "react";
 
 export const useShare = () => {
 	const { handleSubmit, register, setValue } = useForm<ShareFormDataType>();
 	const { user } = useUser();
+	const router = useRouter();
+	const client = useQueryClient();
 
+	const [startLoading, setStartLoading] = useState(false);
 	const randomId = Math.random().toString(32).substring(2);
 
 	const postRef = collection(firestore, "posts");
-	const { mutate, isLoading } = useFirestoreCollectionMutation(postRef);
+	const { mutate, isLoading } = useFirestoreCollectionMutation(postRef, {
+		onSuccess: () => {
+			setStartLoading(false);
+			client.invalidateQueries(["card-grid-posts"]);
+			client.invalidateQueries(["my-posts"]);
+			router.replace("/");
+		},
+	});
 
 	const onSubmit: SubmitHandler<ShareFormDataType> = async (formData) => {
-		let imgFilePathArr: string[] = [];
+		setStartLoading(true);
+		let imgFileArr: ImgInfoType[] = [];
 		console.log("upload process");
 
 		if (!user) return console.log("no user");
@@ -33,15 +46,16 @@ export const useShare = () => {
 				const imgUploadPath = `${imgRefPath}${user.uid}/${imgFileName}`;
 				const imgUploadRef = ref(storage, imgUploadPath);
 				const snapshot = await uploadBytes(imgUploadRef, resizeImg);
-				const url = await getDownloadURL(snapshot.ref);
-				await imgFilePathArr.push(url);
+				const path = await snapshot.ref.fullPath;
+				const src = await getDownloadURL(snapshot.ref);
+				await imgFileArr.push({ src, path });
 			})
 		);
 
 		const testPostingValue = {
 			title: formData.title,
 			point: formData.point,
-			image: imgFilePathArr,
+			image: imgFileArr,
 			spec: {
 				case: "nice case",
 				cpu: "good cpu",
@@ -57,9 +71,9 @@ export const useShare = () => {
 			authorId: user?.uid,
 		};
 
-		await mutate(testPostingValue);
-		imgFilePathArr = [];
+		mutate(testPostingValue);
+		imgFileArr = [];
 	};
 
-	return { onSubmit, handleSubmit, register, isLoading, setValue };
+	return { onSubmit, handleSubmit, register, isLoading, setValue, startLoading };
 };

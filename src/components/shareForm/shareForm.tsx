@@ -5,7 +5,7 @@ import { useShare } from "./useShare";
 
 const ShareForm: FC = () => {
 	const htmlId = useId();
-	const { onSubmit, handleSubmit, register, isLoading, setValue } = useShare();
+	const { onSubmit, handleSubmit, register, isLoading, setValue, startLoading } = useShare();
 	return (
 		<form onSubmit={handleSubmit((data) => onSubmit(data))}>
 			<VStack spacing={8}>
@@ -25,7 +25,7 @@ const ShareForm: FC = () => {
 						{...register("point")}
 					/>
 				</FormControl>
-				<Button fontWeight="semibold" colorScheme="linkedin" type="submit" isLoading={isLoading}>
+				<Button fontWeight="semibold" colorScheme="linkedin" type="submit" isLoading={isLoading || startLoading}>
 					共有する
 				</Button>
 			</VStack>

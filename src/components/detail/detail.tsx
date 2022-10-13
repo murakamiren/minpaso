@@ -4,7 +4,7 @@ import { Spec } from "../../types/post";
 import { useDetail } from "./useDetail";
 
 const Detail: FC = () => {
-	const { postData, user, isLoading, onClickToDeleteMyPost } = useDetail();
+	const { postData, user, isLoading, onClickToDeleteMyPost, isLoadingStart } = useDetail();
 
 	if (!postData)
 		return (
@@ -19,7 +19,7 @@ const Detail: FC = () => {
 		<Box>
 			{postData?.image.map((img, i) => (
 				<Box key={i} w="200px">
-					<Image src={img} alt="pc" w="full" h="full" />
+					<Image src={img.src} alt="pc" w="full" h="full" />
 				</Box>
 			))}
 			<Text>{postData?.title}</Text>
@@ -34,7 +34,11 @@ const Detail: FC = () => {
 				);
 			})}
 			{user?.uid === postData.authorId && (
-				<Button colorScheme="red" isLoading={isLoading} onClick={() => onClickToDeleteMyPost()}>
+				<Button
+					colorScheme="red"
+					isLoading={isLoading || isLoadingStart}
+					onClick={() => onClickToDeleteMyPost(postData.image)}
+				>
 					削除する
 				</Button>
 			)}
