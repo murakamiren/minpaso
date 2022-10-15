@@ -31,7 +31,7 @@ const MyPage: NextPageWithLayout = () => {
 					</Heading>
 				</Center>
 				<Box mt={12}>
-					<MyPageTab myPosts={<MyPostGridMemo user={user} />} favorite={<MyFavoriteGridMemo />} />
+					<MyPageTab myPosts={<MyPostGridMemo user={user} />} favorite={<MyFavoriteGridMemo user={user} />} />
 				</Box>
 			</Box>
 		</main>
