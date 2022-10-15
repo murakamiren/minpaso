@@ -10,12 +10,19 @@ import { handleResize } from "../../lib/loadImage";
 import { useRouter } from "next/router";
 import { useQueryClient } from "react-query";
 import { useState } from "react";
+import { useToast } from "@chakra-ui/react";
 
 export const useShare = () => {
-	const { handleSubmit, register, setValue } = useForm<ShareFormDataType>();
+	const {
+		handleSubmit,
+		register,
+		setValue,
+		formState: { errors },
+	} = useForm<ShareFormDataType>();
 	const { user } = useUser();
 	const router = useRouter();
 	const client = useQueryClient();
+	const toast = useToast();
 
 	const [startLoading, setStartLoading] = useState(false);
 	const randomId = Math.random().toString(32).substring(2);
@@ -26,6 +33,11 @@ export const useShare = () => {
 			setStartLoading(false);
 			client.invalidateQueries(["card-grid-posts"]);
 			client.invalidateQueries(["my-posts"]);
+			toast({
+				title: "記事を投稿しました！",
+				status: "success",
+				duration: 3000,
+			});
 			router.replace("/");
 		},
 	});
@@ -56,17 +68,7 @@ export const useShare = () => {
 			title: formData.title,
 			point: formData.point,
 			image: imgFileArr,
-			spec: {
-				case: "nice case",
-				cpu: "good cpu",
-				cpuCooler: "ice cold",
-				motherboard: "big board",
-				memory: "Pog 16GB",
-				gpu: "RTX 4090 8GB",
-				powerSupply: "sage 800w gold",
-				storage: "512GB ssd",
-				etc: "LED",
-			},
+			spec: formData.spec,
 			author: user?.displayName,
 			authorId: user?.uid,
 		};
@@ -75,5 +77,5 @@ export const useShare = () => {
 		imgFileArr = [];
 	};
 
-	return { onSubmit, handleSubmit, register, isLoading, setValue, startLoading };
+	return { onSubmit, handleSubmit, register, isLoading, setValue, startLoading, errors };
 };
