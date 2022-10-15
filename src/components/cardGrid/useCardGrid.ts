@@ -1,8 +1,8 @@
 import { useFirestoreQueryData } from "@react-query-firebase/firestore";
 import { collection, query } from "firebase/firestore";
-import { useState } from "react";
 import { useUser } from "../../hook/useUser";
 import { firestore } from "../../lib/firebase";
+import { formatPostData } from "../../util/cardPostsDataFormat";
 import { postsConverter } from "../../util/firestoreConverter";
 
 export const useCardGrid = () => {
@@ -12,25 +12,7 @@ export const useCardGrid = () => {
 		subscribe: true,
 	});
 
-	const formattedPostsData = postsData?.map((post) => {
-		let isFavorite: boolean;
-
-		if (!user) {
-			isFavorite = false;
-		} else {
-			isFavorite = post.favorited?.includes(user.uid) as boolean;
-		}
-
-		const data = {
-			id: post.id,
-			title: post.title,
-			author: post.author,
-			firstImage: post.image[0].src,
-			isFavorite: isFavorite,
-		};
-
-		return data;
-	});
+	const formattedPostsData = formatPostData(postsData, user);
 
 	return { formattedPostsData };
 };
