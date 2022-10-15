@@ -3,4 +3,5 @@ export type CardProps = {
 	userName: string;
 	title: string;
 	postId: string;
+	isFavorite: boolean;
 };
