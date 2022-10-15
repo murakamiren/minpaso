@@ -7,7 +7,7 @@ import { postDetailQueryIdAtom } from "../../store/postDetailAtom";
 export const useCard = () => {
 	const router = useRouter();
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const [hover, isHover] = useState(false);
+	const [isHover, setIsHover] = useState(false);
 	const [scale, setScale] = useState(1);
 	const [filter, setFilter] = useState("brightness(1)");
 	const setId = useSetAtom(postDetailQueryIdAtom);
@@ -18,7 +18,7 @@ export const useCard = () => {
 	};
 
 	useEffect(() => {
-		if (hover) {
+		if (isHover) {
 			setScale(() => 1.05);
 			setFilter(() => "brightness(0.8)");
 			onOpen();
@@ -27,7 +27,7 @@ export const useCard = () => {
 			setFilter(() => "brightness(1)");
 			onClose();
 		}
-	}, [hover]);
+	}, [isHover]);
 
-	return { scale, filter, isHover, clickToPassQueryId, isOpen };
+	return { scale, filter, setIsHover, clickToPassQueryId, isOpen };
 };
