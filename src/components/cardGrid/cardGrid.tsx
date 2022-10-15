@@ -4,9 +4,9 @@ import Card from "../card/card";
 import { useCardGrid } from "./useCardGrid";
 
 const CardGrid: FC = () => {
-	const { formattedPostsData, isLoading } = useCardGrid();
+	const { formattedPostsData } = useCardGrid();
 
-	if (isLoading)
+	if (!formattedPostsData)
 		return (
 			<Center>
 				<Spinner />
@@ -15,9 +15,15 @@ const CardGrid: FC = () => {
 
 	return (
 		<Grid gridTemplateColumns="repeat(auto-fit, minmax(min(440px, 100%), 1fr))" gap={8} justifyItems="center">
-			{formattedPostsData?.map((post) => (
+			{formattedPostsData.map((post) => (
 				<GridItem key={post.id}>
-					<Card src={post.firstImage} userName={post.author} postId={post.id} title={post.title} />
+					<Card
+						src={post.firstImage}
+						userName={post.author}
+						postId={post.id}
+						title={post.title}
+						isFavorite={post.isFavorite}
+					/>
 				</GridItem>
 			))}
 		</Grid>

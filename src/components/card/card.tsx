@@ -1,13 +1,16 @@
-import { Box, Icon, IconButton, Image, SlideFade, Text } from "@chakra-ui/react";
+import { Box, Button, Icon, Image, SlideFade, Text } from "@chakra-ui/react";
 import { BsHeartFill, BsShareFill } from "react-icons/bs";
 import { FC, useState } from "react";
 import { CardProps } from "./type";
 import { useCard } from "./useCard";
+import { useAddFavorite } from "../../hook/useAddFavorite";
 
-const Card: FC<CardProps> = ({ src, userName, title, postId }) => {
+const Card: FC<CardProps> = ({ src, userName, title, postId, isFavorite }) => {
 	const [favoriteHover, setFavoriteHover] = useState(false);
 	const [shareHover, setShareHover] = useState(false);
 	const { scale, filter, clickToPassQueryId, isOpen, setIsHover } = useCard();
+	const { addFavorite } = useAddFavorite(postId, isFavorite);
+
 	return (
 		<Box
 			w="full"
@@ -18,7 +21,6 @@ const Card: FC<CardProps> = ({ src, userName, title, postId }) => {
 			cursor="pointer"
 			overflow="hidden"
 			pos="relative"
-			onClick={() => clickToPassQueryId(postId)}
 		>
 			<SlideFade
 				in={isOpen}
@@ -35,11 +37,12 @@ const Card: FC<CardProps> = ({ src, userName, title, postId }) => {
 			>
 				<Icon
 					as={BsHeartFill}
-					color={favoriteHover ? "red.500" : "whiteAlpha.900"}
+					color={favoriteHover || isFavorite ? "red.500" : "whiteAlpha.900"}
 					w={5}
 					h={5}
 					onMouseOver={() => setFavoriteHover(true)}
 					onMouseOut={() => setFavoriteHover(false)}
+					onClick={() => addFavorite()}
 				/>
 				<Icon
 					as={BsShareFill}
@@ -61,6 +64,7 @@ const Card: FC<CardProps> = ({ src, userName, title, postId }) => {
 				transition="ease-out 0.3s"
 				transform={`scale(${scale})`}
 				filter={filter}
+				onClick={() => clickToPassQueryId(postId)}
 			/>
 			<SlideFade in={isOpen} offsetY="18px">
 				<Text pos="absolute" bottom={4} left={4} zIndex={10} color="whiteAlpha.900" fontWeight="bold">

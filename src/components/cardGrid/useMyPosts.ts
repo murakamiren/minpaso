@@ -6,7 +6,7 @@ import { postsConverter } from "../../util/firestoreConverter";
 
 export const useMyPosts = (user: User) => {
 	const ref = query(collection(firestore, "posts").withConverter(postsConverter), where("authorId", "==", user.uid));
-	const { data: myPostsData, isLoading } = useFirestoreQueryData(["my-posts"], ref);
+	const { data: myPostsData, isLoading } = useFirestoreQueryData(["my-posts"], ref, { subscribe: true });
 
 	const formattedMyPostsData = myPostsData?.map((post) => ({
 		id: post.id,

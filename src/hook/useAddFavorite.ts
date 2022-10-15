@@ -1,25 +1,20 @@
 import { useToast } from "@chakra-ui/react";
 import { useFirestoreDocumentMutation } from "@react-query-firebase/firestore";
-import { arrayUnion, collection, doc } from "firebase/firestore";
-import { useState } from "react";
-import { useQueryClient } from "react-query";
+import { arrayRemove, arrayUnion, collection, doc } from "firebase/firestore";
 import { firestore } from "../lib/firebase";
-import { postsConverter } from "../util/firestoreConverter";
 import { useUser } from "./useUser";
 
-export const useAddFavorite = (docId: string) => {
+export const useAddFavorite = (docId: string, isFavorite: boolean) => {
 	const { user } = useUser();
-	const [isLoading, setIsLoading] = useState(false);
 	const toast = useToast();
-	const client = useQueryClient();
 
 	const col = collection(firestore, "posts");
 	const ref = doc(col, docId);
-	const { mutate } = useFirestoreDocumentMutation(ref);
+	const { mutate } = useFirestoreDocumentMutation(ref, {
+		merge: true,
+	});
 
 	const addFavorite = () => {
-		setIsLoading(true);
-
 		if (!user) {
 			toast({
 				title: "アカウントが見つかりません",
@@ -28,21 +23,10 @@ export const useAddFavorite = (docId: string) => {
 				duration: 3000,
 			});
 
-			setIsLoading(false);
-
 			return;
 		}
 
-		mutate(
-			{ favorited: arrayUnion(user.uid) },
-			{
-				onSuccess: () => {
-					setIsLoading(false);
-					client.invalidateQueries(["card-grid-posts"]);
-					client.invalidateQueries(["my-posts"]);
-				},
-			}
-		);
+		isFavorite ? mutate({ favorited: arrayRemove(user.uid) }) : mutate({ favorited: arrayUnion(user.uid) });
 	};
 
 	return { addFavorite };
