@@ -1,9 +1,12 @@
+import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, Button, Center, Image, Spinner, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { FC } from "react";
 import { Spec } from "../../types/post";
 import { useDetail } from "./useDetail";
 
 const Detail: FC = () => {
+	const router = useRouter();
 	const { postData, user, isLoading, onClickToDeleteMyPost, isLoadingStart } = useDetail();
 
 	if (!postData)
@@ -15,6 +18,7 @@ const Detail: FC = () => {
 
 	return (
 		<Box>
+			<ArrowBackIcon onClick={() => router.back()} cursor="pointer" w={8} h={8} />
 			{postData?.image.map((img, i) => (
 				<Box key={i} w="200px">
 					<Image src={img.src} alt="pc" w="full" h="full" />
