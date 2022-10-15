@@ -13,8 +13,6 @@ const Detail: FC = () => {
 			</Center>
 		);
 
-	console.log(postData);
-
 	return (
 		<Box>
 			{postData?.image.map((img, i) => (
