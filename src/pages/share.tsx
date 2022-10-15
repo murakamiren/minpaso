@@ -3,8 +3,14 @@ import { Box, Heading } from "@chakra-ui/react";
 import { NextPageWithLayout } from "next";
 import NextLink from "next/link";
 import ShareForm from "../components/shareForm/shareForm";
+import { useRedirect } from "../hook/useRedirect";
+import { useUser } from "../hook/useUser";
 
 const Share: NextPageWithLayout = () => {
+	const { user } = useUser();
+
+	useRedirect(user);
+
 	return (
 		<main>
 			<Box px={20} pb={8}>
