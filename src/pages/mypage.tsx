@@ -1,6 +1,8 @@
 import { Avatar, Box, Center, Heading, Spinner, VStack } from "@chakra-ui/react";
 import { NextPageWithLayout } from "next";
+import MyFavoriteGridMemo from "../components/cardGrid/myFavoriteGrid";
 import MyPostGridMemo from "../components/cardGrid/myPostsGrid";
+import MyPageTab from "../components/myPageTab/myPageTab";
 import { useUser } from "../hook/useUser";
 import Layout from "../layout/layout";
 
@@ -29,7 +31,7 @@ const MyPage: NextPageWithLayout = () => {
 					</Heading>
 				</Center>
 				<Box mt={12}>
-					<MyPostGridMemo user={user} />
+					<MyPageTab myPosts={<MyPostGridMemo user={user} />} favorite={<MyFavoriteGridMemo />} />
 				</Box>
 			</Box>
 		</main>
