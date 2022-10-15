@@ -1,4 +1,4 @@
-import { Center, Grid, GridItem, Spinner } from "@chakra-ui/react";
+import { Center, Grid, GridItem, Spinner, Text } from "@chakra-ui/react";
 import { FC, memo } from "react";
 import Card from "../card/card";
 import { MyPostGridProps } from "./type";
@@ -11,6 +11,13 @@ const MyPostsGrid: FC<MyPostGridProps> = ({ user }) => {
 		return (
 			<Center>
 				<Spinner />
+			</Center>
+		);
+
+	if (formattedMyPostsData?.length === 0)
+		return (
+			<Center>
+				<Text>まだ投稿していません！</Text>
 			</Center>
 		);
 

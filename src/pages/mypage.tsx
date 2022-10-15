@@ -3,6 +3,7 @@ import { NextPageWithLayout } from "next";
 import MyFavoriteGridMemo from "../components/cardGrid/myFavoriteGrid";
 import MyPostGridMemo from "../components/cardGrid/myPostsGrid";
 import MyPageTab from "../components/myPageTab/myPageTab";
+import { useRedirect } from "../hook/useRedirect";
 import { useUser } from "../hook/useUser";
 import Layout from "../layout/layout";
 
@@ -10,6 +11,8 @@ const MyPage: NextPageWithLayout = () => {
 	const { user } = useUser();
 
 	const userPhoto = user?.photoURL as string;
+
+	useRedirect(user);
 
 	if (!user)
 		return (
