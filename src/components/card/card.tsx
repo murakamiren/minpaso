@@ -8,6 +8,7 @@ import { useAddFavorite } from "../../hook/useAddFavorite";
 const Card: FC<CardProps> = ({ src, userName, title, postId, isFavorite }) => {
 	const [favoriteHover, setFavoriteHover] = useState(false);
 	const [shareHover, setShareHover] = useState(false);
+	const [endLoad, setEndLoad] = useState(false);
 	const { scale, filter, clickToPassQueryId, isOpen, setIsHover } = useCard();
 	const { addFavorite } = useAddFavorite(postId, isFavorite);
 
@@ -21,6 +22,9 @@ const Card: FC<CardProps> = ({ src, userName, title, postId, isFavorite }) => {
 			cursor="pointer"
 			overflow="hidden"
 			pos="relative"
+			visibility={endLoad ? "visible" : "collapse"}
+			opacity={endLoad ? "1" : "0"}
+			transition="opacity 500ms ease-out"
 		>
 			<SlideFade
 				in={isOpen}
@@ -65,6 +69,7 @@ const Card: FC<CardProps> = ({ src, userName, title, postId, isFavorite }) => {
 				transform={`scale(${scale})`}
 				filter={filter}
 				onClick={() => clickToPassQueryId(postId)}
+				onLoad={() => setEndLoad(true)}
 			/>
 			<SlideFade in={isOpen} offsetY="18px">
 				<Text pos="absolute" bottom={4} left={4} zIndex={10} color="whiteAlpha.900" fontWeight="bold">
