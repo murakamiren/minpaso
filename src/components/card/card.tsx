@@ -1,22 +1,56 @@
-import { Box, Image, SlideFade, Text } from "@chakra-ui/react";
-import { FC } from "react";
+import { Box, Icon, IconButton, Image, SlideFade, Text } from "@chakra-ui/react";
+import { BsHeartFill, BsShareFill } from "react-icons/bs";
+import { FC, useState } from "react";
 import { CardProps } from "./type";
 import { useCard } from "./useCard";
 
 const Card: FC<CardProps> = ({ src, userName, title, postId }) => {
-	const { scale, filter, isHover, clickToPassQueryId, isOpen } = useCard();
+	const [favoriteHover, setFavoriteHover] = useState(false);
+	const [shareHover, setShareHover] = useState(false);
+	const { scale, filter, clickToPassQueryId, isOpen, setIsHover } = useCard();
 	return (
 		<Box
 			w="full"
 			h="full"
 			maxH="400px"
-			onMouseOver={() => isHover(true)}
-			onMouseOut={() => isHover(false)}
+			onMouseOver={() => setIsHover(true)}
+			onMouseOut={() => setIsHover(false)}
 			cursor="pointer"
 			overflow="hidden"
 			pos="relative"
 			onClick={() => clickToPassQueryId(postId)}
 		>
+			<SlideFade
+				in={isOpen}
+				offsetY="-18px"
+				style={{
+					display: "flex",
+					flexDirection: "row-reverse",
+					position: "absolute",
+					top: 16,
+					zIndex: 10,
+					width: "100%",
+					paddingRight: 16,
+				}}
+			>
+				<Icon
+					as={BsHeartFill}
+					color={favoriteHover ? "red.500" : "whiteAlpha.900"}
+					w={5}
+					h={5}
+					onMouseOver={() => setFavoriteHover(true)}
+					onMouseOut={() => setFavoriteHover(false)}
+				/>
+				<Icon
+					as={BsShareFill}
+					color={shareHover ? "linkedin.600" : "whiteAlpha.900"}
+					marginRight={4}
+					w={5}
+					h={5}
+					onMouseOver={() => setShareHover(true)}
+					onMouseOut={() => setShareHover(false)}
+				/>
+			</SlideFade>
 			<Image
 				src={src}
 				alt="pc image"
