@@ -29,7 +29,5 @@ export const useCard = () => {
 		}
 	}, [isHover]);
 
-	useEffect(() => {}, []);
-
 	return { scale, filter, setIsHover, clickToPassQueryId, isOpen };
 };
