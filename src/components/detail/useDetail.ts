@@ -1,22 +1,20 @@
 import { useFirestoreDocumentData, useFirestoreDocumentDeletion } from "@react-query-firebase/firestore";
 import { collection, doc } from "firebase/firestore";
-import { useAtomValue } from "jotai";
 import { useRouter } from "next/router";
 import { useQueryClient } from "react-query";
 import { useUser } from "../../hook/useUser";
 import { firestore, storage } from "../../lib/firebase";
-import { postDetailQueryIdAtom } from "../../store/postDetailAtom";
 import { postsConverter } from "../../util/firestoreConverter";
 import { ImgInfoType } from "../shareForm/type";
 import { deleteObject, ref } from "firebase/storage";
 import { useState } from "react";
 
-export const useDetail = () => {
+export const useDetail = (id: string) => {
 	const router = useRouter();
 	const client = useQueryClient();
 	const { user } = useUser();
-	const queryPostId = useAtomValue(postDetailQueryIdAtom);
 	const gsUrl = process.env.NEXT_PUBLIC_STORAGE_URL as string;
+	const queryPostId = id;
 
 	const [isLoadingStart, setIsLoadingStart] = useState(false);
 

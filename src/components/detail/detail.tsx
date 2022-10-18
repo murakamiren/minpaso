@@ -1,13 +1,17 @@
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, Button, Center, Heading, Image, Spinner, Text } from "@chakra-ui/react";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import { FC } from "react";
 import { Spec } from "../../types/post";
 import { useDetail } from "./useDetail";
 
-const Detail: FC = () => {
+type ssrProps = {
+	param: string;
+};
+
+const Detail = ({ param }: ssrProps) => {
 	const router = useRouter();
-	const { postData, user, isLoading, onClickToDeleteMyPost, isLoadingStart } = useDetail();
+	const { postData, user, isLoading, onClickToDeleteMyPost, isLoadingStart } = useDetail(param);
 
 	if (!postData)
 		return (
@@ -55,6 +59,16 @@ const Detail: FC = () => {
 			)}
 		</Box>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const param = context.query;
+
+	return {
+		props: {
+			param: param.postId as string,
+		},
+	};
 };
 
 export default Detail;
