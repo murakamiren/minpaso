@@ -8,13 +8,15 @@ import { postsConverter } from "../../util/firestoreConverter";
 import { ImgInfoType } from "../shareForm/type";
 import { deleteObject, ref } from "firebase/storage";
 import { useState } from "react";
+import { useAtomValue } from "jotai";
+import { postDetailQueryIdAtom } from "../../store/postDetailAtom";
 
-export const useDetail = (id: string) => {
+export const useDetail = () => {
 	const router = useRouter();
 	const client = useQueryClient();
 	const { user } = useUser();
 	const gsUrl = process.env.NEXT_PUBLIC_STORAGE_URL as string;
-	const queryPostId = id;
+	const queryPostId = useAtomValue(postDetailQueryIdAtom);
 
 	const [isLoadingStart, setIsLoadingStart] = useState(false);
 
