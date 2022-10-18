@@ -1,16 +1,23 @@
 import { Box, Icon, Image, SlideFade, Text } from "@chakra-ui/react";
-import { BsHeartFill, BsShareFill } from "react-icons/bs";
+import { BsHeartFill, BsTwitter } from "react-icons/bs";
 import { FC, useState } from "react";
 import { CardProps } from "./type";
 import { useCard } from "./useCard";
 import { useAddFavorite } from "../../hook/useAddFavorite";
+import { TwitterShareButton } from "react-share";
+import { useRouter } from "next/router";
+import { getOriginPath } from "../../util/getPath";
 
 const Card: FC<CardProps> = ({ src, userName, title, postId, isFavorite }) => {
+	const router = useRouter();
+	const originURL = getOriginPath();
 	const [favoriteHover, setFavoriteHover] = useState(false);
 	const [shareHover, setShareHover] = useState(false);
 	const [endLoad, setEndLoad] = useState(false);
 	const { scale, filter, clickToPassQueryId, isOpen, setIsHover } = useCard();
 	const { addFavorite } = useAddFavorite(postId, isFavorite);
+
+	const url = `${originURL}${router.asPath}`;
 
 	return (
 		<Box
@@ -48,15 +55,17 @@ const Card: FC<CardProps> = ({ src, userName, title, postId, isFavorite }) => {
 					onMouseOut={() => setFavoriteHover(false)}
 					onClick={() => addFavorite()}
 				/>
-				<Icon
-					as={BsShareFill}
-					marginRight={4}
-					w={5}
-					h={5}
-					color={shareHover ? "linkedin.600" : "whiteAlpha.900"}
-					onMouseOver={() => setShareHover(true)}
-					onMouseOut={() => setShareHover(false)}
-				/>
+				<TwitterShareButton style={{ marginRight: 4 }} url={url} title={`みんぱそ：${title}`} hashtags={["みんぱそ"]}>
+					<Icon
+						as={BsTwitter}
+						marginRight={4}
+						w={5}
+						h={5}
+						color={shareHover ? "linkedin.600" : "whiteAlpha.900"}
+						onMouseOver={() => setShareHover(true)}
+						onMouseOut={() => setShareHover(false)}
+					/>
+				</TwitterShareButton>
 			</SlideFade>
 			<Image
 				src={src}
