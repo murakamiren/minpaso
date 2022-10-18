@@ -1,4 +1,4 @@
-import { Box, Button, Icon, Image, SlideFade, Text } from "@chakra-ui/react";
+import { Box, Icon, Image, SlideFade, Text } from "@chakra-ui/react";
 import { BsHeartFill, BsShareFill } from "react-icons/bs";
 import { FC, useState } from "react";
 import { CardProps } from "./type";
@@ -50,10 +50,10 @@ const Card: FC<CardProps> = ({ src, userName, title, postId, isFavorite }) => {
 				/>
 				<Icon
 					as={BsShareFill}
-					color={shareHover ? "linkedin.600" : "whiteAlpha.900"}
 					marginRight={4}
 					w={5}
 					h={5}
+					color={shareHover ? "linkedin.600" : "whiteAlpha.900"}
 					onMouseOver={() => setShareHover(true)}
 					onMouseOut={() => setShareHover(false)}
 				/>
